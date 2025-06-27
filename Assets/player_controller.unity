@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 1091669720}
   - component: {fileID: 1091669724}
   - component: {fileID: 1091669725}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,11 +741,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  projectileSpeed: 100
   maxJumps: 2
   sprites:
   - {fileID: 7523060822199911185, guid: 268780a1c9154400da9437e5c0b2772f, type: 3}
   - {fileID: 933679079, guid: 268780a1c9154400da9437e5c0b2772f, type: 3}
   spriteTime: 0
+  projectilePrefab: {fileID: 6875228075161208916, guid: 9d5e4473c1e90bc40bb3a1432fa5150a, type: 3}
 --- !u!61 &1091669725
 BoxCollider2D:
   m_ObjectHideFlags: 0

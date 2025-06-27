@@ -8,11 +8,13 @@ public class PlayerController: MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     [SerializeField] private float speed;
+    [SerializeField] private float projectileSpeed;
     [SerializeField] private int maxJumps;
     [SerializeField] private List<Sprite> sprites;
     [SerializeField] private float spriteTime;
     private bool grounded;
     private int jumpCount;
+    [SerializeField] private GameObject projectilePrefab;
 
     private void Awake()
     {
@@ -54,6 +56,7 @@ public class PlayerController: MonoBehaviour
         sr.sprite = sprites[0];
     }
 
+    [Obsolete]
     private void Update()
     {
         // this is like a while loop, be careful
@@ -85,6 +88,17 @@ public class PlayerController: MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(ShowSprite());
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Rigidbody2D prb = projectile.GetComponent<Rigidbody2D>();
+
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mouseWorldPos - transform.position);
+            direction.Normalize();
+
+            prb.AddForce(direction * projectileSpeed);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 }
